@@ -1,0 +1,284 @@
+function Sections() {
+  return (
+    <>
+      <Hero />
+      <About />
+      <Services />
+      <Cases />
+      <Team />
+      <Territory />
+      <ClientsSec />
+      <Contact />
+    </>);
+
+}
+
+function Hero() {
+  return (
+    <section id="home" className="hero" data-screen-label="01 Home">
+      <div className="hero-meta">
+        <span>Nemo Hub · Sanremo · 2026</span>
+        <span>www.nemohub.it</span>
+        <span>Manifesto / 01</span>
+      </div>
+      <div className="hero-logo-placeholder"></div>
+      <h1 className="hero-title">
+        <span className="thin">Un solo team,</span> tu, vivi l'evento.
+      </h1>
+      <div className="hero-sub">
+        <div>
+          <div className="k">Ecosistema</div>
+          <div className="v">Brand, musica, cultura ed esperienze si incontrano.</div>
+        </div>
+        <div>
+          <div className="k">Radici</div>
+          <div className="v">Trentennale esperienza, nate nel Festival di Sanremo.</div>
+        </div>
+        <div>
+          <div className="k">Scala</div>
+          <div className="v">Hub di connessioni e creatività su scala nazionale.</div>
+        </div>
+        <a className="hero-sub-cta" href="#about" onClick={(e) => {e.preventDefault();document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });}}>
+          Scopri →
+        </a>
+      </div>
+      <div className="scroll-hint">Scroll</div>
+    </section>);
+
+}
+
+function About() {
+  return (
+    <section id="about" className="sec theme-accent" data-screen-label="02 About">
+      <div className="sec-head">
+        <div className="sec-head-meta">
+          <div className="sec-label" style={{ color: "rgb(213, 165, 83)" }}>02 / About</div>
+          <p style={{ color: "rgb(213, 165, 83)" }}>Non un'agenzia: un ecosistema creativo.</p>
+        </div>
+        <h2><span className="thin" style={{ color: "rgb(213, 165, 83)" }}>Dietro</span><br />le quinte.</h2>
+      </div>
+      <div className="about-body">
+        <div>
+          <p className="lead">Nemo Hub nasce dall'esperienza trentennale delle figure che lo compongono, evolvendosi oggi in una società dinamica capace di connettere aziende, talenti, partner e territori.</p>
+        </div>
+        <div>
+          <p>Con radici profonde nel contesto del Festival di Sanremo, abbiamo sviluppato un know-how unico nella creazione di progetti speciali, attivazioni di brand ed esperienze ad alto impatto mediatico.</p>
+          <p>Il nostro approccio è fluido e contemporaneo: un network selezionato di professionisti, location, partner e fornitori ci consente di trasformare idee in esperienze concrete — dalla strategia alla produzione.</p>
+          <p>Affidarsi a Nemo Hub significa scegliere una realtà che unisce visione, esperienza e spirito innovativo.</p>
+        </div>
+      </div>
+      <div className="about-stats">
+        <div className="cell"><div className="num">30+</div><div className="lbl" style={{ color: "rgb(213, 165, 83)" }}>Anni di esperienza</div></div>
+        <div className="cell"><div className="num">11</div><div className="lbl" style={{ color: "rgb(213, 165, 83)" }}>Regioni operative</div></div>
+        <div className="cell"><div className="num">7</div><div className="lbl" style={{ color: "rgb(213, 165, 83)" }}>Città in tour</div></div>
+        <div className="cell"><div className="num">#1</div><div className="lbl" style={{ color: "rgb(213, 165, 83)" }}>Scalata chart FIMI</div></div>
+      </div>
+    </section>);
+
+}
+
+const PRIMARY = [
+{ num: "01", title: "Produzione Eventi & Format", desc: "Creazione, progettazione e gestione di eventi boutique, con focus sulla direzione artistica e autorale per un'esperienza unica." },
+{ num: "02", title: "Creative Hub & Network", desc: "Network di connessioni nel mondo di musica, brand, entertainment, eventi e comunicazione." },
+{ num: "03", title: "Marketing & Branding", desc: "Strategia e gestione di sponsorizzazioni, marketing e branding per potenziare la visibilità di un evento o di un prodotto." },
+{ num: "04", title: "Allestimenti & Graphic Solution", desc: "Progettazione e realizzazione di allestimenti scenici e soluzioni grafiche personalizzate per eventi, fiere, presentazioni." },
+{ num: "05", title: "Local Production", desc: "Supporto completo nella gestione e realizzazione di produzioni locali, durante grandi eventi come il Festival di Sanremo." }];
+
+
+const SECONDARY = [
+{ k: "06", t: "Finding Location", d: "Ricerca e selezione di location esclusive e adatte alle specifiche esigenze di eventi e produzioni." },
+{ k: "07", t: "Logistica Produttiva", d: "Coordinamento della logistica per un'efficace esecuzione di ogni fase produttiva." },
+{ k: "08", t: "Service Audio / Luci", d: "Fornitura e gestione di attrezzature audio e luci professionali per atmosfere perfette." },
+{ k: "09", t: "Produzione Audiovisiva", d: "Video, riprese e montaggi di alta qualità per eventi, campagne e progetti." },
+{ k: "10", t: "Personale Qualificato", d: "Selezione e gestione di sicurezza, truccatori, hostess e professionisti per il successo dell'evento." },
+{ k: "11", t: "Social Media Management", d: "Gestione strategica dei social per promuovere eventi, brand e contenuti." }];
+
+
+function Services() {
+  return (
+    <section id="servizi" className="sec theme-warm" data-screen-label="03 Servizi">
+      <div className="sec-head">
+        <div className="sec-head-meta">
+          <div className="sec-label">03 / Services</div>
+          <p>11 aree operative. Un solo team integrato.</p>
+        </div>
+        <h2><span className="thin">Cosa</span><br />facciamo.</h2>
+      </div>
+      <div className="svc-list">
+        {PRIMARY.map((s) =>
+        <div key={s.num} className="svc-row">
+            <div className="svc-num">{s.num}</div>
+            <div className="svc-title">{s.title}</div>
+            <div className="svc-desc">{s.desc}</div>
+            <div className="svc-arrow">→</div>
+          </div>
+        )}
+      </div>
+      <div className="svc-secondary">
+        {SECONDARY.map((s) =>
+        <div key={s.k} className="svc-sec-item">
+            <div className="k">{s.k} · Altri servizi</div>
+            <h4>{s.t}</h4>
+            <p>{s.d}</p>
+          </div>
+        )}
+      </div>
+    </section>);
+
+}
+
+const CASE_DATA = [
+{
+  tags: [["Case / 01", true], "Warner Music Italy", "2025"],
+  title: <><span className="thin">Ed Sheeran</span><br />— PLAY.</>,
+  body: [
+  "Per il lancio del singolo Old Phone e in occasione dell'uscita dell'album Play di Ed Sheeran, Nemo Hub ha realizzato per Warner Music Italy un'installazione iconica.",
+  "Una cabina telefonica rosa posizionata nel cuore di Napoli, in Piazza del Plebiscito."],
+
+  meta: [["Client", "Warner Music"], ["Location", "Napoli · Plebiscito"], ["Artist", "Ed Sheeran"]],
+  vClass: "v-warm",
+  vLabel: "Installazione / Location activation",
+  vTitle: "Cabina rosa,\nPiazza del Plebiscito",
+  vTop: ["Install · 01", "Ph 04:30"],
+  vBot: ["Ed Sheeran · Play", "Napoli — 2025"]
+},
+{
+  tags: [["Case / 02", true], "Warner Music Italy", "2025"],
+  title: <><span className="thin">Annalisa</span><br />— Signature Tour.</>,
+  body: [
+  "Il progetto per Annalisa è stato inaugurato con un esclusivo party privato curato per Warner Music Italy presso una location d'eccellenza a Milano — attivazione strategica che ha supportato la scalata dell'album fino al #1 FIMI.",
+  "A seguire, una maratona di 7 giorni in 7 città — Milano, Bologna, Torino, Roma, Napoli, Bari, Catania — ha elevato il \"firma copie\" in evento artistico itinerante."],
+
+  meta: [["Client", "Warner Music"], ["Stops", "7 città / 7 giorni"], ["Chart", "#1 FIMI"]],
+  flip: true,
+  vClass: "v-accent",
+  vLabel: "Signature event & exhibition tour",
+  vTitle: "7 città\n7 giorni",
+  vTop: ["Tour · 02", "Italy"],
+  vBot: ["Annalisa · 2025", "MI — BO — TO — RM — NA — BA — CT"]
+},
+{
+  tags: [["Case / 03", true], "Beiersdorf", "Sanremo 2026"],
+  title: <><span className="thin">NIVEA</span><br />— Pop-up Store.</>,
+  body: [
+  "Durante il Festival di Sanremo 2026 abbiamo curato l'attivazione NIVEA: un pop-up store integrato nel cuore cittadino con un palinsesto di esperienze e contenuti quotidiani.",
+  "Produzione on-site, logistica, allestimento e content capture: tutto gestito dal nostro team locale radicato nel territorio."],
+
+  meta: [["Client", "NIVEA"], ["Format", "Pop-up Store"], ["Dates", "Sanremo · 2026"]],
+  vClass: "v-light",
+  vLabel: "Retail activation",
+  vTitle: "NIVEA Pop-up,\nSanremo 2026",
+  vTop: ["Retail · 03", "Sanremo"],
+  vBot: ["NIVEA · Pop-up", "Festival 2026"]
+},
+{
+  tags: [["Case / 04", true], "HQ Project", "Sanremo 2026"],
+  title: <><span className="thin">DOOM</span><br />— District HQ.</>,
+  body: [
+  "DOOM District è il nostro HeadQuarter progettuale per Sanremo 2026: uno spazio curato dove brand, artisti, media e network si incontrano per costruire le attivazioni del festival.",
+  "Produzione integrata, spazi modulari, contenuti live — un dietro-le-quinte aperto ai partner selezionati."],
+
+  meta: [["Status", "Active"], ["Capacity", "Multi-brand"], ["Year", "Sanremo 2026"]],
+  flip: true,
+  vClass: "",
+  vLabel: "Headquarter / Multi-brand",
+  vTitle: "DOOM District,\nSanremo HQ",
+  vTop: ["HQ · 04", "2026"],
+  vBot: ["DOOM District", "Sanremo Headquarter"]
+}];
+
+
+function Cases() {
+  return (
+    <section id="case" className="sec theme-cream" data-screen-label="04 Case">
+      <div className="sec-head">
+        <div className="sec-head-meta">
+          <div className="sec-label">04 / Selected Work</div>
+          <p>Quattro attivazioni che raccontano come produciamo.</p>
+        </div>
+        <h2><span className="thin">Case</span><br />history.</h2>
+      </div>
+      <div className="cases">
+        {CASE_DATA.map((c, i) =>
+        <div key={i} className={"case" + (c.flip ? " flip" : "")}>
+            <div className={"case-visual " + c.vClass}>
+              <div className="case-visual-meta"><span>{c.vTop[0]}</span><span>{c.vTop[1]}</span></div>
+              <div className="case-visual-center">
+                <div className="label">{c.vLabel}</div>
+                <h5>{c.vTitle.split("\n").map((l, j) => <div key={j}>{l}</div>)}</h5>
+              </div>
+              <div className="case-visual-footer"><span>{c.vBot[0]}</span><span>{c.vBot[1]}</span></div>
+            </div>
+            <div className="case-info">
+              <div className="tags">
+                {c.tags.map((t, j) => Array.isArray(t) ? <span key={j} className="primary">{t[0]}</span> : <span key={j}>· {t}</span>)}
+              </div>
+              <h3>{c.title}</h3>
+              {c.body.map((p, j) => <p key={j}>{p}</p>)}
+              <div className="case-meta">
+                {c.meta.map(([k, v], j) => <div key={j}><div className="k">{k}</div><div className="v">{v}</div></div>)}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>);
+
+}
+
+const TEAM_MAIN = [
+{ role: "CEO · Direzione Artistica", name: "Samuele Priolo", id: "01" },
+{ role: "Production & Client", name: "Simona Demelas", id: "02" },
+{ role: "Production & Client", name: "Simone Priolo", id: "03" }];
+
+
+const TEAM_TECH = [
+{ r: "Direzione Tecnica", n: "Ing. Silvia De Laude" },
+{ r: "Direzione Tecnica", n: "Arch. Sara Barera" },
+{ r: "Direzione Tecnica", n: "Geom. Monica Rodà" },
+{ r: "Consulenza Legale", n: "Avv. Roberto Calzoni" },
+{ r: "Marketing Manager", n: "Michele Patti" },
+{ r: "Executive Producer", n: "Maria D'Ottavio" },
+{ r: "Consulente Contrattuale", n: "Dott. Massimo Bettalico" },
+{ r: "Network", n: "Partner & Fornitori" }];
+
+
+function Team() {
+  return (
+    <section id="team" className="sec theme-cream theme-cream-deep" data-screen-label="05 Team">
+      <div className="sec-head">
+        <div className="sec-head-meta">
+          <div className="sec-label">05 / The People</div>
+          <p>Competenze trasversali integrate per la perfetta riuscita di ogni progetto.</p>
+        </div>
+        <h2><span className="thin">Il nostro</span><br />team.</h2>
+      </div>
+      <div className="team-grid">
+        {TEAM_MAIN.map((t) =>
+        <div key={t.name} className="team-card">
+            <div>
+              <div className="role">{t.role}</div>
+              <h4>{t.name}</h4>
+            </div>
+            <div className="id">· {t.id}</div>
+          </div>
+        )}
+      </div>
+      <div className="team-tech">
+        <div className="team-tech-lbl">Direzione tecnica · Consulenza · Produzione</div>
+        <div className="team-tech-grid">
+          {TEAM_TECH.map((t, i) =>
+          <div key={i} className="row">
+              <div className="r">{t.r}</div>
+              <div className="n">{t.n}</div>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>);
+
+}
+
+window.Sections = Sections;
+window.Hero = Hero;window.About = About;window.Services = Services;
+window.Cases = Cases;window.Team = Team;

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemo Hub — Un solo team, tu, vivi l'evento.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=cube4">
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="image-slot.js"></script>
+<script type="text/babel" src="components/Logo3D.jsx?v=cube4"></script>
+<script type="text/babel" src="components/TopBar.jsx"></script>
+<script type="text/babel" src="components/SectionsExtra.jsx?v=cube3"></script>
+<script type="text/babel" src="components/Sections.jsx?v=cube1"></script>
+
+<script type="text/babel">
+const { useEffect, useState } = React;
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "logo3D": true,
+  "accentColor": "#3f486e",
+  "bgTone": 1
+}/*EDITMODE-END*/;
+
+function App() {
+  const [tw, setTw] = useState(TWEAK_DEFAULTS);
+  const [tweakOpen, setTweakOpen] = useState(false);
+
+  useEffect(() => {
+    const onMsg = (e) => {
+      if (!e.data) return;
+      if (e.data.type === "__activate_edit_mode") setTweakOpen(true);
+      if (e.data.type === "__deactivate_edit_mode") setTweakOpen(false);
+    };
+    window.addEventListener("message", onMsg);
+    window.parent.postMessage({ type: "__edit_mode_available" }, "*");
+    return () => window.removeEventListener("message", onMsg);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.style.setProperty("--accent", tw.accentColor);
+    // tone the bg slightly
+    const bgs = ["#ecebe6", "#ece6e0", "#e8eae6", "#e9ebed"];
+    const bg2s = ["#e3e1d9", "#e5ddd3", "#dfe2dc", "#dfe3e7"];
+    document.documentElement.style.setProperty("--bg", bgs[tw.bgTone] || bgs[0]);
+    document.documentElement.style.setProperty("--bg-2", bg2s[tw.bgTone] || bg2s[0]);
+  }, [tw.accentColor, tw.bgTone]);
+
+  const update = (k, v) => {
+    const next = { ...tw, [k]: v };
+    setTw(next);
+    window.parent.postMessage({ type: "__edit_mode_set_keys", edits: { [k]: v } }, "*");
+  };
+
+  return (
+    <>
+      <TopBar />
+      <Logo3D enabled={tw.logo3D} />
+      <Sections />
+      <div className={"tweaks" + (tweakOpen ? " show" : "")}>
+        <h5>Tweaks</h5>
+        <label>
+          <span>Logo 3D</span>
+          <input type="checkbox" checked={tw.logo3D} onChange={(e) => update("logo3D", e.target.checked)} />
+        </label>
+        <label>
+          <span>Accent</span>
+          <input type="color" value={tw.accentColor} onChange={(e) => update("accentColor", e.target.value)} />
+        </label>
+        <label>
+          <span>Background tone</span>
+          <select value={tw.bgTone} onChange={(e) => update("bgTone", +e.target.value)}>
+            <option value="0">Whisper (neutral)</option>
+            <option value="1">Warm bone</option>
+            <option value="2">Sage</option>
+            <option value="3">Mist blue</option>
+          </select>
+        </label>
+      </div>
+    </>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+</script>
+</body>
+</html>

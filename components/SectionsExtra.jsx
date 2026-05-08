@@ -1,0 +1,129 @@
+const { useState } = React;
+
+const REGIONS_OP = ["Liguria","Piemonte","Lombardia","Veneto","Friuli V.G.","Emilia Romagna","Toscana","Lazio","Campania","Puglia","Sicilia"];
+
+/* Realistic Italy outline at viewBox 0 0 1000 1450 — boot silhouette,
+   80+ vertices, includes Liguria curve, Tuscany inset, Gargano spur,
+   Salento heel, Calabria toe, plus Sicilia and Sardegna islands. */
+const ITALY_REGIONS = [
+  {
+    id: "nord",
+    label: "NORD",
+    sub: "Liguria · Piemonte · Lombardia · Veneto · Friuli V.G. · Emilia Romagna",
+    path: "M 345 440 L 310 415 L 260 390 L 210 375 L 180 360 L 175 330 L 185 295 L 210 265 L 240 225 L 290 195 L 350 180 L 410 170 L 480 150 L 560 145 L 650 180 L 730 205 L 800 260 L 755 305 L 720 330 L 700 355 L 715 385 L 740 415 L 755 440 Z",
+    labelPos: { x: 480, y: 290 },
+  },
+  {
+    id: "centro",
+    label: "CENTRO",
+    sub: "Toscana · Lazio · Umbria · Marche · Abruzzo · Molise · Sardegna",
+    path: "M 345 440 L 755 440 L 765 485 L 780 520 L 795 565 L 815 605 L 825 635 L 840 665 L 850 700 L 920 690 L 965 680 L 985 705 L 965 720 L 920 725 L 880 720 L 870 730 L 880 760 L 905 770 L 490 770 L 470 750 L 460 690 L 445 660 L 450 625 L 440 590 L 420 560 L 410 520 L 410 490 L 375 470 Z M 200 605 L 240 595 L 270 620 L 285 665 L 290 725 L 270 775 L 235 790 L 200 770 L 180 720 L 175 660 L 185 620 Z",
+    labelPos: { x: 615, y: 600 },
+  },
+  {
+    id: "sud",
+    label: "SUD",
+    sub: "Campania · Basilicata · Puglia · Calabria · Sicilia",
+    path: "M 490 770 L 905 770 L 920 785 L 940 795 L 965 805 L 975 835 L 940 850 L 905 855 L 870 860 L 820 870 L 780 880 L 750 895 L 770 920 L 790 940 L 780 975 L 810 1010 L 790 1050 L 770 1090 L 755 1130 L 760 1170 L 755 1210 L 745 1240 L 720 1255 L 700 1235 L 665 1200 L 670 1160 L 660 1120 L 675 1080 L 660 1040 L 670 1000 L 650 960 L 620 920 L 605 880 L 620 840 L 610 805 L 580 820 L 540 830 L 500 825 L 470 800 Z M 600 1310 L 700 1300 L 800 1310 L 870 1330 L 890 1360 L 850 1380 L 750 1390 L 650 1380 L 590 1360 L 575 1335 Z",
+    labelPos: { x: 800, y: 1080 },
+  },
+];
+
+function Territory() {
+  return (
+    <section id="dove" className="sec theme-cream" data-screen-label="06 Territorio">
+      <div className="sec-head">
+        <div className="sec-head-meta">
+          <div className="sec-label">06 / Territory</div>
+          <p>Rete consolidata, supporto locale, professionalità in tutta Italia.</p>
+        </div>
+        <h2><span className="thin">Dove</span><br/>operiamo.</h2>
+      </div>
+      <div className="map-wrap">
+        <div className="map-copy">
+          <div className="lead">Servizi professionali su tutto il territorio italiano.</div>
+          <p>Grazie alla nostra rete consolidata supportiamo eventi e produzioni a pieno regime — ovunque ci siano necessità di produzione, direzione artistica, marketing, allestimenti e gestione talenti.</p>
+          <div className="regions-chips">
+            {REGIONS_OP.map(r => <span key={r}>{r}</span>)}
+          </div>
+          <div className="map-howto">
+            <div className="k">→ Drop your photos</div>
+            <p>Trascina una foto evento su <b>Nord</b>, <b>Centro</b>, <b>Sud</b>. Si imprime sulla forma della regione e resta lì.</p>
+          </div>
+        </div>
+        <div className="italy-map">
+          <div className="italy-stack">
+            <div className="italy-band band-nord">
+              <image-slot id="italia-nord" placeholder="Drop NORD" shape="rect"></image-slot>
+            </div>
+            <div className="italy-band band-centro">
+              <image-slot id="italia-centro" placeholder="Drop CENTRO" shape="rect"></image-slot>
+            </div>
+            <div className="italy-band band-sud">
+              <image-slot id="italia-sud" placeholder="Drop SUD" shape="rect"></image-slot>
+            </div>
+            <div className="italy-divider div-1"></div>
+            <div className="italy-divider div-2"></div>
+            <div className="italy-stencil"></div>
+            <div className="italy-tag tag-nord">NORD</div>
+            <div className="italy-tag tag-centro">CENTRO</div>
+            <div className="italy-tag tag-sud">SUD</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const CLIENTS = [
+  "Warner Music","NIVEA","Ed Sheeran","Annalisa","RAI",
+  "Sony Music","Festival Sanremo","Universal","DOOM District","Mondadori",
+  "Vodafone","Beiersdorf","Amazon Music","Spotify","Comune di Napoli",
+];
+
+function ClientsSec() {
+  return (
+    <section id="clients" className="sec theme-accent" data-screen-label="07 Clients">
+      <div className="sec-head">
+        <div className="sec-head-meta">
+          <div className="sec-label">07 / Partners</div>
+          <p>Brand, label, istituzioni, artisti. La nostra rete di fiducia.</p>
+        </div>
+        <h2><span className="thin">Clients</span><br/>& partner.</h2>
+      </div>
+      <div className="clients-grid">
+        {CLIENTS.map((c, i) => (
+          <div key={i} className="client-cell">
+            <div className="client-logo">{c}</div>
+            <div className="client-name">— {c}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Contact() {
+  return (
+    <section id="contatti" className="contact-wrap theme-ink" data-screen-label="08 Contatti">
+      <div className="sec-label">08 / Contact</div>
+      <div className="contact-big" style={{marginTop: "28px"}}>
+        <span className="thin">Pronto a virare la tua</span> comunicazione?<br/>
+        Scrivici a <a href="mailto:info@nemohub.it">info@nemohub.it</a>.
+      </div>
+      <div className="contact-grid">
+        <div><div className="k">Email</div><div className="v">info@nemohub.it</div></div>
+        <div><div className="k">Phone</div><div className="v">+39 392 740 7011</div></div>
+        <div><div className="k">HQ</div><div className="v">Strada degli Olandesi 22b<br/>18038 Sanremo (IM)</div></div>
+        <div><div className="k">Legal</div><div className="v">Nemo Hub SRLS<br/>P.IVA 01784790089</div></div>
+      </div>
+      <div className="footer-bottom">
+        <span>© Nemo Hub · 2026</span>
+        <span>Un solo team, tu, vivi l'evento.</span>
+        <span>www.nemohub.it</span>
+      </div>
+    </section>
+  );
+}
+
+Object.assign(window, { Territory, ClientsSec, Contact });
